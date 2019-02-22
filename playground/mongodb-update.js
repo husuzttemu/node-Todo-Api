@@ -6,9 +6,20 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', { useNewUrlParser: true
     }
 
     const db = client.db('TodoApp');
-    db.collection('Todos').deleteOne({text:"Something to do"}).then((result) => {
+    db.collection('Todos').findOneAndUpdate({
+        text:"Something to do"
+    }, { 
+        $set:
+        {
+            text:"Something to doxxxxx"
+        }
+    }, {
+        returnOriginal: false
+    }
+        ).then((result) => {
         console.log(result);
     }) ;
 
     client.close();
+
 }) ;
